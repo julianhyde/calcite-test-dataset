@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
     ubuntucalcite.vm.network :forwarded_port, guest: 27017, host: 27017 # mongodb
     ubuntucalcite.vm.network :forwarded_port, guest: 5432, host: 5432 # postgresql
     ubuntucalcite.vm.network :forwarded_port, guest: 3306, host: 3306 # mysql
-    ubuntucalcite.vm.network :forwarded_port, guest: 8089, host: 8089 # splunk
+    ubuntucalcite.vm.network :forwarded_port, guest: 8089, host: 9089 # splunk
     ubuntucalcite.vm.network :forwarded_port, guest: 9042, host: 9042 # cassandra
     ubuntucalcite.vm.network :forwarded_port, guest: 8081, host: 8081 # druid coordinator
     ubuntucalcite.vm.network :forwarded_port, guest: 8082, host: 8082 # druid broker
@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
 
       v.customize ['modifyvm', :id, '--name', 'ubuntu1404-calcite']
       v.customize ['modifyvm', :id, '--cpus', '1']
-      v.customize ['modifyvm', :id, '--memory', 3072]
+      v.customize ['modifyvm', :id, '--memory', 6144]
       v.customize ['modifyvm', :id, '--ioapic', 'off']
       v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
       v.customize ['modifyvm', :id, '--nictype1', 'virtio']
