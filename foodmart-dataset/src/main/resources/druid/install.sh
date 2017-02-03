@@ -17,29 +17,32 @@
 
 cd ~
 
+export DRUID=0.9.2
+export ZK=3.4.6
+
 echo Removing previous Zookeeper
-rm -rf zookeeper-3.4.6
+rm -rf zookeeper-${ZK}
 
 echo Install and start Zookeeper
 (
- if [ ! -f /var/cache/apt/archives/zookeeper-3.4.6.tar.gz ]; then
-   curl --silent http://www.gtlib.gatech.edu/pub/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz -o /var/cache/apt/archives/zookeeper-3.4.6.tar.gz
+ if [ ! -f /var/cache/apt/archives/zookeeper-${ZK}.tar.gz ]; then
+   curl --silent http://www.gtlib.gatech.edu/pub/apache/zookeeper/zookeeper-${ZK}/zookeeper-${ZK}.tar.gz -o /var/cache/apt/archives/zookeeper-${ZK}.tar.gz
  fi
- tar -xzf /var/cache/apt/archives/zookeeper-3.4.6.tar.gz
- cd zookeeper-3.4.6
+ tar -xzf /var/cache/apt/archives/zookeeper-${ZK}.tar.gz
+ cd zookeeper-${ZK}
  cp conf/zoo_sample.cfg conf/zoo.cfg
  ./bin/zkServer.sh start
 )
 
 echo Removing previous Druid
-rm -rf druid-0.9.1.1
+rm -rf druid-${DRUID}
 
 echo Installing Druid
-if [ ! -f /var/cache/apt/archives/druid-0.9.1.1-bin.tar.gz ]; then
-  curl --silent http://static.druid.io/artifacts/releases/druid-0.9.1.1-bin.tar.gz -o /var/cache/apt/archives/druid-0.9.1.1-bin.tar.gz
+if [ ! -f /var/cache/apt/archives/druid-${DRUID}-bin.tar.gz ]; then
+  curl --silent http://static.druid.io/artifacts/releases/druid-${DRUID}-bin.tar.gz -o /var/cache/apt/archives/druid-${DRUID}-bin.tar.gz
 fi
-tar -xzf /var/cache/apt/archives/druid-0.9.1.1-bin.tar.gz
-cd druid-0.9.1.1
+tar -xzf /var/cache/apt/archives/druid-${DRUID}-bin.tar.gz
+cd druid-${DRUID}
 bin/init
 
 ln -s /dataset/druid/foodmart .
